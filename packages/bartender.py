@@ -1,7 +1,7 @@
 from packages.utils.details import INPUT_DIR, SEVEN_URL_PATH, TEN_URL_PATH, P7215_PHASE1_URL_PATH, P7215_PHASE2_URL_PATH, P7128_URL_PATH, LOG_DIR
 from packages.utils import helper, download_pdf
 from datetime import datetime
-# from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import TimeoutException, NoSuchElementException, ElementClickInterceptedException
 import pyinputplus as pp
 
 choices = {
@@ -41,15 +41,15 @@ def main():
             download_pdf.download_label(url, label, lot, fg)
             helper.checking_folder()
             helper.move_file(label, fg)
-            helper.print_status_message(
+            helper.print_done_message(
                 "Operation for label '{}-{}' completed successfully.".format(label, fg))
 
-        except Exception as err:
+        except (NoSuchElementException, TimeoutException, ElementClickInterceptedException) as err:
             counting += 1
             helper.print_error_message("Operation stop when downloading {}-{} label.".format(label, fg))
             with open(LOG_DIR / "log-{}.txt".format(date), 'a') as f:
                 f.write(
-                    f"{counting}) Label: {label}    Lot: {lot}    Code: {fg}    Error: {err.msg}\n")
+                    f"{counting}) Label: {label}    Lot: {lot}    Code: {fg}    Error: {err.args}\n")
 
 
 if __name__ == "__main__":

@@ -38,7 +38,7 @@ def print_info_message(msg):
 
 
 def print_success_message(msg):
-    print("{}[SUCCESS]{}      {}".format(Fore.GREEN, Style.RESET_ALL, msg))
+    print("{}[SUCCESS]{}      {}".format(Fore.LIGHTGREEN_EX, Style.RESET_ALL, msg))
 
 
 def print_status_message(msg):
@@ -52,6 +52,11 @@ def print_error_message(msg):
     print("{}[ERROR]{}        {}".format(Fore.RED, Style.RESET_ALL, msg))
     print()
 
+
+def print_done_message(msg):
+    print()
+    print("{}[DONE]{}         {}".format(Fore.GREEN, Style.RESET_ALL, msg))
+    print()
 
 def get_detail_from_csv(csv_file):
     # get product code from csv file
