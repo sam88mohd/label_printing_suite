@@ -1,10 +1,11 @@
 from packages.utils.details import EXECUTABLE_PATH
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.options import Options as CO
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
+from selenium.webdriver.edge.options import Options as EO
 from colorama import init as colorama_init
 from colorama import Fore
 from colorama import Style
@@ -18,8 +19,8 @@ import os
 colorama_init()
 
 
-def create_browser():
-    chrome_options = Options()
+def create_chrome_browser():
+    chrome_options = CO()
     chrome_options.add_argument('--ignore-certificate-errors')
     # chrome_options.add_argument('--incognito')
     chrome_options.add_argument('--headless=new')
@@ -32,13 +33,28 @@ def create_browser():
     return browser
 
 
+def create_edge_browser():
+    edge_options = EO()
+    edge_options
+    edge_options.add_argument('user-data-dir=C:\\Users\\username\\AppData\\Local\\Microsoft\\Edge\\User Data')
+    edge_options.add_argument('profile-directory=Profile 2')
+    edge_options.add_argument('--headless=new')
+    edge_options.add_experimental_option(
+        'excludeSwitches', ['enable-logging'])
+    edge_options.add_argument('--log-level=3')
+    browser = webdriver.Edge(service=Service(
+        executable_path=EXECUTABLE_PATH), options=edge_options)
+    return browser
+
+
 def print_info_message(msg):
     print("{}[INFO]{}         {}".format(
         Fore.LIGHTBLUE_EX, Style.RESET_ALL, msg))
 
 
 def print_success_message(msg):
-    print("{}[SUCCESS]{}      {}".format(Fore.LIGHTGREEN_EX, Style.RESET_ALL, msg))
+    print("{}[SUCCESS]{}      {}".format(
+        Fore.LIGHTGREEN_EX, Style.RESET_ALL, msg))
 
 
 def print_status_message(msg):
@@ -57,6 +73,7 @@ def print_done_message(msg):
     print()
     print("{}[DONE]{}         {}".format(Fore.GREEN, Style.RESET_ALL, msg))
     print()
+
 
 def get_detail_from_csv(csv_file):
     # get product code from csv file

@@ -44,8 +44,9 @@ def main():
             helper.print_done_message(
                 "Operation for label '{}-{}' completed successfully.".format(label, fg))
 
-        except (NoSuchElementException, TimeoutException, ElementClickInterceptedException) as err:
+        except Exception as err:
             counting += 1
+            print(err)
             helper.print_error_message("Operation stop when downloading {}-{} label.".format(label, fg))
             with open(LOG_DIR / "log-{}.txt".format(date), 'a') as f:
                 f.write(
