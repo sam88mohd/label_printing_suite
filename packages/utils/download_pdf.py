@@ -2,14 +2,14 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from packages.utils.details import USERNAME, PASSWORD
-from packages.utils.helper import wait_for_loading, create_edge_browser, print_info_message, print_status_message, print_success_message
+from packages.utils.helper import wait_for_loading, create_chrome_browser, print_info_message, print_status_message, print_success_message
 from time import sleep
 # import keyboard
 import os
 
 
 def download_label(path, label, lot, fg):
-    browser = create_edge_browser()
+    browser = create_chrome_browser()
     browser.get(path + label + ".btw")
 
     print_status_message("Starting Download Label: '{}-{}'".format(label, fg))
