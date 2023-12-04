@@ -1,0 +1,9 @@
+colorama==0.4.6
+halo==0.0.31
+pandas==2.0.0
+PyInputPlus==0.2.12
+pymssql==2.2.7
+python-dotenv==1.0.0
+Requests==2.31.0
+selenium==4.15.2
+urllib3==1.26.15
