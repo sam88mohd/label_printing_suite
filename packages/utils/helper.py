@@ -47,10 +47,9 @@ def print_status_message(msg):
     print()
 
 
-def print_error_message(msg1, msg2):
+def print_error_message(msg):
     print()
-    print("{}[ERROR]{}        {}".format(Fore.RED, Style.RESET_ALL, msg1))
-    print("\t\t{}{}{}".format(Fore.RED, msg2, Style.RESET_ALL))
+    print("{}[ERROR]{}        {}".format(Fore.RED, Style.RESET_ALL, msg))
     print()
 
 

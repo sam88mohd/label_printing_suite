@@ -1,7 +1,7 @@
 from packages.utils.details import INPUT_DIR, SEVEN_URL_PATH, TEN_URL_PATH, P7215_PHASE1_URL_PATH, P7215_PHASE2_URL_PATH, P7128_URL_PATH, LOG_DIR
 from packages.utils import helper, download_pdf
 from datetime import datetime
-from selenium.common.exceptions import TimeoutException
+# from selenium.common.exceptions import TimeoutException
 import pyinputplus as pp
 
 choices = {
@@ -24,7 +24,7 @@ for file in INPUT_DIR.glob("*.csv"):
 
 
 def main():
-    date = datetime.now().strftime("%d%m%Y %H:%M")
+    date = datetime.now().strftime("%d%m%Y%M")
     path = pp.inputMenu([key for key in choices],
                         prompt="Please select one Category of the following:\n", numbered=True)
 
@@ -44,10 +44,9 @@ def main():
             helper.print_status_message(
                 "Operation for label '{}-{}' completed successfully.".format(label, fg))
 
-        except TimeoutException as err:
+        except Exception as err:
             counting += 1
-            helper.print_error_message("{}".format(
-                err.msg), "Operation stop when downloading {} label.".format(label))
+            helper.print_error_message("Operation stop when downloading {}-{} label.".format(label, fg))
             with open(LOG_DIR / "log-{}.txt".format(date), 'a') as f:
                 f.write(
                     f"{counting}) Label: {label}    Lot: {lot}    Code: {fg}    Error: {err.msg}\n")
