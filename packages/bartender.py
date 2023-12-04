@@ -24,7 +24,7 @@ for file in INPUT_DIR.glob("*.csv"):
 
 
 def main():
-    date = datetime.now().strftime("%d/%m/%Y %H:%M")
+    date = datetime.now().strftime("%d%m%Y %H:%M")
     path = pp.inputMenu([key for key in choices],
                         prompt="Please select one Category of the following:\n", numbered=True)
 

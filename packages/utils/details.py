@@ -11,7 +11,7 @@ TEN_URL_PATH = BASE_URL + "Strip Pack/Pouch/Variable Labels/Bell-Mark 10 Lane/"
 P7128_URL_PATH = BASE_URL + "Strip Pack/Pouch/Project 7182/7182-Single Lane/"
 EXECUTABLE_PATH = Path("./libs/drivers/chromedriver.exe")
 INPUT_DIR = Path("./input")
-LOG_DIR = Path("./log") 
+LOG_DIR = Path("./logs") 
 
 if Path('packages/utils/.env').exists():
     load_dotenv(ENV_PATH)
