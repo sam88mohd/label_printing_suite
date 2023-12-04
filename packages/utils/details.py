@@ -9,7 +9,7 @@ P7215_PHASE2_URL_PATH = BASE_URL + "Strip Pack/Project 7215/Phase - 2/DC-7215-Po
 P7215_PHASE1_URL_PATH = BASE_URL + "Strip Pack/Project 7215/Phase - 1/DC-7215-Pouch Variable/"
 TEN_URL_PATH = BASE_URL + "Strip Pack/Pouch/Variable Labels/Bell-Mark 10 Lane/"
 P7128_URL_PATH = BASE_URL + "Strip Pack/Pouch/Project 7182/7182-Single Lane/"
-EXECUTABLE_PATH = Path("c:\\chromedriver.exe")
+EXECUTABLE_PATH = Path("./libs/drivers/chromedriver.exe")
 INPUT_DIR = Path("./input")
 LOG_DIR = Path("./log") 
 
