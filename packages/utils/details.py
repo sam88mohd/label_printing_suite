@@ -4,11 +4,13 @@ import os
 
 ENV_PATH = "packages/utils/.env"
 BASE_URL = "https://pw01shs6btnap01.bdx.com/BarTender/Print/7f4b2eb0-2b17-4b9e-bda5-ebd99f8eb02d/Malaysia/"
+API_URL = "https://pw01shs6btnap01.bdx.com/BarTender/"
 SEVEN_URL_PATH = BASE_URL + "Strip Pack/Pouch/Variable Labels/"
 P7215_PHASE2_URL_PATH = BASE_URL + "Strip Pack/Project 7215/Phase - 2/DC-7215-Pouch Variable/"
 P7215_PHASE1_URL_PATH = BASE_URL + "Strip Pack/Project 7215/Phase - 1/DC-7215-Pouch Variable/"
 TEN_URL_PATH = BASE_URL + "Strip Pack/Pouch/Variable Labels/Bell-Mark 10 Lane/"
 P7128_URL_PATH = BASE_URL + "Strip Pack/Pouch/Project 7182/7182-Single Lane/"
+URETHRAL_URL_PATH = BASE_URL + "Uretheral/"
 EXECUTABLE_PATH = Path("./libs/drivers/chromedriver.exe")
 INPUT_DIR = Path("./input")
 LOG_DIR = Path("./logs") 

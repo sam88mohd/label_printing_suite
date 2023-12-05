@@ -1,16 +1,16 @@
-from packages.utils.details import EXECUTABLE_PATH
+from packages.utils.details import EXECUTABLE_PATH, USERNAME, PASSWORD
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options as CO
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium import webdriver
 from selenium.webdriver.edge.options import Options as EO
 from colorama import init as colorama_init
+from selenium import webdriver
+from spinners import Spinners
 from colorama import Fore
 from colorama import Style
 from halo import Halo
-from spinners import Spinners
 import csv
 import shutil
 import os
@@ -36,7 +36,8 @@ def create_chrome_browser():
 def create_edge_browser():
     edge_options = EO()
     edge_options
-    edge_options.add_argument('user-data-dir=C:\\Users\\username\\AppData\\Local\\Microsoft\\Edge\\User Data')
+    edge_options.add_argument(
+        'user-data-dir=C:\\Users\\username\\AppData\\Local\\Microsoft\\Edge\\User Data')
     edge_options.add_argument('profile-directory=Profile 2')
     edge_options.add_argument('--headless=new')
     edge_options.add_experimental_option(
@@ -86,6 +87,14 @@ def get_detail_from_csv(csv_file):
             products.append(tuple(row))
 
     return products
+
+
+def enter_user_password(browser):
+    print_info_message("Inserting Username details")
+    browser.find_element(By.ID, "usernameInput").send_keys("bdx\\" + USERNAME)
+
+    print_info_message("Inserting Password details")
+    browser.find_element(By.ID, "passwordInput").send_keys(PASSWORD)
 
 
 def wait_for_loading(browser):

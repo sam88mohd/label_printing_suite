@@ -20,7 +20,7 @@ menu = {
     "Open links": open_link.main,
     "Generate Work order": generate_wo.main,
     "Search by Family": search_family.main,
-    "get pdf from BarTender": bartender.main,
+    "Print/Download label - BarTender": bartender.main,
     "Get WO from BarTender DB": fetchWO.main,
     "Quit": quit
 }
