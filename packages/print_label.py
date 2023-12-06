@@ -47,7 +47,8 @@ def print_label(label_path, lot, serial, printer, fg):
     wait_for_loading(browser)
 
     print_info_message("Clicking Print Button")
-    browser.find_element(By.XPATH, "//input[@type='submit']").click()
+    WebDriverWait(browser, 30).until(EC.element_to_be_clickable(
+        (By.XPATH, "//input[@type='submit']"))).click()
 
     wait_for_loading(browser)
 

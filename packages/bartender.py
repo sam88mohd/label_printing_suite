@@ -23,7 +23,7 @@ def main():
             choices=server_printers, prompt="Please select the printer to print:\n", numbered=True)
         print()
     lot_filename = INPUT_DIR / pp.inputMenu(
-        [key for key in files], prompt="Please select the csv Filename:\n\n", numbered=True, blank=True)
+        [key for key in files], prompt="Please select the csv Filename:\n", numbered=True, blank=True)
     print()
     products = helper.get_detail_from_csv(lot_filename)
 
@@ -48,9 +48,9 @@ def main():
                 serial = pp.inputInt("Enter serial number:\n")
                 print_label.print_label(
                     label_path, lot=lot, serial=serial, printer=pl, fg=fg)
-                helper.wait_for_loading()
                 helper.print_success_message("Label successfully printed!")
             except Exception as err:
+                print(err)
                 helper.print_error_message("Error!")
             helper.wait_for_input()
             continue

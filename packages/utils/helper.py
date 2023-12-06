@@ -168,6 +168,6 @@ def write_to_csv(*fieldnames, data):
     print_success_message("Csv created")
 
 
-@Halo(text="Press ENTER to continue...", spinner=Spinners.bouncingBar.value, placement='right')
+@Halo(text="Press ENTER to continue...", placement='right')
 def wait_for_input():
     input()
