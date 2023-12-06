@@ -3,13 +3,15 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from packages.utils.details import PRINT_URL
-from packages.utils.helper import create_chrome_browser, enter_user_password, wait_for_loading, print_info_message
+from packages.utils.helper import create_chrome_browser, enter_user_password, wait_for_loading, print_info_message, print_status_message
 
 
-def print_label(label_path, lot, serial, printer):
+def print_label(label_path, lot, serial, printer, fg):
     browser = create_chrome_browser()
-    
+
     browser.get(PRINT_URL + label_path)
+
+    print_status_message("Starting Download Label: '{}'".format(fg))
 
     # get credentials
     enter_user_password(browser=browser)

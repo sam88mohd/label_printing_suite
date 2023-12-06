@@ -13,48 +13,48 @@ for file in INPUT_DIR.glob("*.csv"):
 
 def main():
     date = datetime.now().strftime("%d%m%Y%M")
+    counting = 0
+    cont = 'yes'
 
     selection = pp.inputMenu(['Print', 'Download'], numbered=True)
-
+    print()
     if selection == 'Print':
         server_printers = request_bartender_api.get_printer_list()
         pl = pp.inputMenu(
-            choices=server_printers, prompt="Please select the printer to print:\n", numbered=True)
-
+            choices=server_printers, prompt="Please select the printer to print:\n\n", numbered=True)
     lot_filename = INPUT_DIR / pp.inputMenu(
-        [key for key in files], prompt="Please select the csv Filename:\n", numbered=True, blank=True)
+        [key for key in files], prompt="Please select the csv Filename:\n\n", numbered=True, blank=True)
 
     products = helper.get_detail_from_csv(lot_filename)
 
-    counting = 0
     for product in products:
-        label_path, lot, fg = product
-        if selection == 'Download':
-            try:
-                download_pdf.download_label(label_path, lot, fg)
-                helper.checking_folder()
-                helper.move_file(helper.get_label_name(label_path), fg)
-                helper.print_done_message(
-                    "Operation for label '{}' completed successfully.".format(fg))
-            except Exception as err:
-                counting += 1
-                helper.print_error_message(
-                    "Operation stop when downloading {} label.".format(fg))
-                with open(LOG_DIR / "log-{}.txt".format(date), 'a') as f:
-                    f.write(
-                        f"{counting}) Lot: {lot}    Code: {fg}    Error: {err.args}\n")
-        elif selection == 'Print':
-            while cont:
+        while cont == 'yes':
+            label_path, lot, fg = product
+            if selection == 'Download':
+                try:
+                    download_pdf.download_label(label_path, lot, fg)
+                    helper.checking_folder()
+                    helper.move_file(helper.get_label_name(label_path), fg)
+                    helper.print_done_message(
+                        "Operation for label '{}' completed successfully.".format(fg))
+                except Exception as err:
+                    counting += 1
+                    helper.print_error_message(
+                        "Operation stop when downloading {} label.".format(fg))
+                    with open(LOG_DIR / "log-{}.txt".format(date), 'a') as f:
+                        f.write(
+                            f"{counting}) Lot: {lot}    Code: {fg}    Error: {err.args}\n")
+            elif selection == 'Print':
                 try:
                     serial = pp.inputInt("Enter serial number:\n")
                     print_label.print_label(
-                        label_path, lot=lot, serial=serial, printer=pl)
+                        label_path, lot=lot, serial=serial, printer=pl, fg=fg)
                     helper.wait_for_loading()
                     helper.print_success_message("Label successfully printed!")
                 except Exception as err:
                     helper.print_error_message("Error!")
-                cont = pp.inputBool(
-                    prompt="Continue next print?\n", trueVal='yes', falseVal='no')
+                cont = pp.inputYesNo(
+                    prompt="Continue next print?\n")
 
 
 if __name__ == "__main__":
