@@ -1,17 +1,18 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from packages.utils.helper import wait_for_loading, create_chrome_browser, print_info_message, print_status_message, print_success_message, enter_user_password
+from packages.utils.helper import wait_for_loading, create_chrome_browser, print_info_message, print_status_message, print_success_message, enter_user_password, get_label_name
+from packages.utils.details import PRINT_URL
 from time import sleep
-# import keyboard
 import os
 
 
-def download_label(path, label, lot, fg):
-    browser = create_chrome_browser()
-    browser.get(path + label + ".btw")
+def download_label(path, lot, fg):
 
-    print_status_message("Starting Download Label: '{}-{}'".format(label, fg))
+    browser = create_chrome_browser()
+    browser.get(PRINT_URL + path)
+
+    print_status_message("Starting Download Label: '{}'".format(fg))
 
     # get credentials
     enter_user_password(browser=browser)
@@ -56,11 +57,11 @@ def download_label(path, label, lot, fg):
     seconds = 0
     dl_wait = True
     while dl_wait:
-        if not os.path.exists(os.path.join('C:\\Users\\{}\\Downloads'.format(os.getlogin()), label + '.pdf')):
+        if not os.path.exists(os.path.join('C:\\Users\\{}\\Downloads'.format(os.getlogin()), get_label_name(path=path) + '.pdf')):
             sleep(seconds)
             seconds += 1
         else:
             break
 
     print_success_message(
-        "{}-{} file successfully downloaded".format(label, fg))
+        "{} file successfully downloaded".format(fg))

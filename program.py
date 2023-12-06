@@ -1,4 +1,5 @@
 from packages import get_product_links, open_link, generate_wo, search_family, bartender, fetchWO
+from packages.utils.request_bartender_api import get_folder_list
 import pyinputplus as pp
 
 
@@ -22,6 +23,7 @@ menu = {
     "Search by Family": search_family.main,
     "Print/Download label - BarTender": bartender.main,
     "Get WO from BarTender DB": fetchWO.main,
+    "Display Print Portal folder list": get_folder_list,
     "Quit": quit
 }
 

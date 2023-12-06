@@ -11,6 +11,8 @@ from spinners import Spinners
 from colorama import Fore
 from colorama import Style
 from halo import Halo
+from pathlib import Path
+from datetime import datetime
 import csv
 import shutil
 import os
@@ -139,3 +141,28 @@ def checking_folder():
         print_info_message(
             "Destination folder not exists. Creating the folder now.")
         os.mkdir("pdf")
+
+
+def get_label_name(path):
+    label_path = path.split('/')
+    label = label_path[-1][:-4]
+    return label
+
+
+def write_to_csv(*fieldnames, data):
+    field_names = list(fieldnames)
+    results_folder_path = Path('results')
+    Path.mkdir(results_folder_path, exist_ok=True)
+    filename = results_folder_path / \
+        f"PrintPortalFolder_{datetime.now().strftime('%d%m%yy%M%S')}.csv"
+    with open(filename, 'w', encoding='UTF-8', newline='') as f:
+        writer = csv.DictWriter(f, fieldnames=field_names)
+        writer.writerow({
+            'path': 'Path'
+        })
+        for row in data:
+            for col in field_names:
+                writer.writerow({
+                    col: row
+                })
+    print_success_message("Csv created")

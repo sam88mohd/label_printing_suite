@@ -2,18 +2,14 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
+from packages.utils.details import PRINT_URL
 from packages.utils.helper import create_chrome_browser, enter_user_password, wait_for_loading, print_info_message
-from packages.utils.details import URETHRAL_URL_PATH
 
 
-def print_label(label_type, lot, serial, printer):
+def print_label(label_path, lot, serial, printer):
     browser = create_chrome_browser()
-    if label_type == 'Inner Carton Label':
-        browser.get(URETHRAL_URL_PATH + label_type + "/UI1390.btw")
-    elif label_type == 'Outer Carton Label (Shipper)':
-        browser.get(URETHRAL_URL_PATH + label_type + "/UO1390.btw")
-    elif label_type == 'Pouch Label':
-        browser.get(URETHRAL_URL_PATH + label_type + "/UP1390.btw")
+    
+    browser.get(PRINT_URL + label_path)
 
     # get credentials
     enter_user_password(browser=browser)
