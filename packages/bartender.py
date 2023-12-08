@@ -42,7 +42,7 @@ def main():
                     "Operation stop when downloading {} label.".format(fg))
                 with open(LOG_DIR / "log-{}.txt".format(date), 'a') as f:
                     f.write(
-                        f"{counting}) Lot: {lot}    Code: {fg}    Error: {err.args}\n")
+                        f"{counting}) Lot: {lot}    Code: {fg}    Error: {err}\n")
         elif selection == 'Print':
             try:
                 serial = pp.inputInt("Enter serial number:\n")
@@ -50,7 +50,6 @@ def main():
                     label_path, lot=lot, serial=serial, printer=pl, fg=fg)
                 helper.print_success_message("Label successfully printed!")
             except Exception as err:
-                print(err)
                 helper.print_error_message("Error!")
             helper.wait_for_input()
             continue

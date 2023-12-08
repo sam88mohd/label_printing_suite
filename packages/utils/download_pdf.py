@@ -8,7 +8,7 @@ import os
 
 
 def download_label(path, lot, fg):
-
+    delay = 20
     browser = create_chrome_browser()
     browser.get(PRINT_URL + path)
 
@@ -18,25 +18,29 @@ def download_label(path, lot, fg):
     enter_user_password(browser=browser)
 
     print_info_message("Clicking Login Button")
-    browser.find_element(By.ID, "LogonPageSubmitButton").click()
-
+    WebDriverWait(browser, delay).until(EC.element_to_be_clickable(
+        (By.ID, "LogonPageSubmitButton"))).click()
+    
+    wait_for_loading(browser)
+    
     print_info_message("Clicking Print Button")
-    browser.find_element(By.ID, "PrintFormPrintButton").click()
+    WebDriverWait(browser, 100).until(EC.element_to_be_clickable(
+        (By.XPATH, "//*[@id='PrintFormPrintButton']"))).click()
 
     wait_for_loading(browser)
 
     print_info_message("Clicking Dropdown Menu")
-    WebDriverWait(browser, 20).until(EC.element_to_be_clickable(
+    WebDriverWait(browser, delay).until(EC.element_to_be_clickable(
         (By.XPATH, "//button[@data-toggle='dropdown']"))).click()
 
     wait_for_loading(browser)
 
     print_info_message("Entering Lot Number: {}".format(lot))
-    WebDriverWait(browser, 20).until(EC.element_to_be_clickable(
+    WebDriverWait(browser, delay).until(EC.element_to_be_clickable(
         (By.XPATH, "//input[@type='search']"))).send_keys(lot)
 
     print_info_message("Selecting Lot Number: {}".format(lot))
-    WebDriverWait(browser, 20).until(EC.element_to_be_clickable(
+    WebDriverWait(browser, delay).until(EC.element_to_be_clickable(
         (By.XPATH, "//div[@class='dataTables_scrollBody']/table/tbody/tr[1]"))).click()
 
     wait_for_loading(browser)
@@ -47,7 +51,7 @@ def download_label(path, lot, fg):
     wait_for_loading(browser)
 
     print_info_message("Clicking Download Button")
-    WebDriverWait(browser, 20).until(
+    WebDriverWait(browser, delay).until(
         EC.element_to_be_clickable((By.XPATH, "//a[@download]"))).click()
 
     # sleep(5)
