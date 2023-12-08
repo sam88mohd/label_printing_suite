@@ -112,7 +112,7 @@ def wait_for_loading(browser):
 
 def move_file(filename, fg):
     source_folder = 'C:\\Users\\{}\\Downloads'.format(os.getlogin())
-    destination_folder = 'pdf'
+    destination_folder = Path('//172.21.49.29/Software/sam/PDF')
     rename_file = "{}-({})".format(filename, fg)
 
     print_info_message(

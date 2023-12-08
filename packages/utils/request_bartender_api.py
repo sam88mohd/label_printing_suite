@@ -1,4 +1,4 @@
-from packages.utils.details import BASE_URL, USERNAME, PASSWORD
+from packages.utils.details import BASE_URL, USERNAME, PASSWORD, folderID
 from packages.utils.helper import write_to_csv
 from halo import Halo
 from spinners import Spinners
@@ -43,18 +43,16 @@ def get_folder_list():
                    spinner=Spinners.bouncingBar.value, placement="right")
     spinner.start()
     response = requests.get(
-        url=BASE_URL + "api/v1/libraries/7f4b2eb0-2b17-4b9e-bda5-ebd99f8eb02d", headers=header, verify=False)
+        url=BASE_URL + "api/v1/libraries/{}".format(folderID), headers=header, verify=False)
     spinner.stop()
 
     if response.ok:
         contents = response.json()['contents']
-        malaysia_file = [
-            content for content in contents if 'Malaysia' in content]
-        for file in malaysia_file:
+        for file in contents:
             print(file)
         save = pp.inputYesNo(
-            prompt="Want to save the list?\n")
+            prompt="Want to save the list? (Yes/No)\n")
         if save == 'yes':
-            write_to_csv('path', data=malaysia_file)
+            write_to_csv('path', data=contents)
     else:
         get_folder_list()

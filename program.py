@@ -17,10 +17,10 @@ def switch(choice):
 
 
 menu = {
-    "Get product link in Master Control": get_product_links.main,
-    "Open links": open_link.main,
+    #"Get product link in Master Control": get_product_links.main,
+    #"Open links": open_link.main,
     "Generate Work order": generate_wo.main,
-    "Search by Family": search_family.main,
+    #"Search by Family": search_family.main,
     "Print/Download label - BarTender": bartender.main,
     "Get WO from BarTender DB": fetchWO.main,
     "Display Print Portal folder list": get_folder_list,
