@@ -24,7 +24,7 @@ def download_label(path, lot, fg):
     wait_for_loading(browser)
     
     print_info_message("Clicking Print Button")
-    WebDriverWait(browser, 100).until(EC.element_to_be_clickable(
+    WebDriverWait(browser, delay).until(EC.element_to_be_clickable(
         (By.XPATH, "//*[@id='PrintFormPrintButton']"))).click()
 
     wait_for_loading(browser)
