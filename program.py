@@ -30,8 +30,8 @@ menu = {
 
 def print_message():
     exit = "no"
-    message = "Label Printing Suites".center(100, '*')
-    print(message, end='\n\n')
+    message = "Label Printing Suites"
+    print(message.center(90 - len(message), '*'), end='\n\n')
     while (exit != "yes"):
         choice = pp.inputMenu([key for key in menu], numbered=True)
         switch(choice)
